@@ -14,7 +14,8 @@
     "typecheck": "tsc --noEmit --incremental false --composite false",
     "clean": "rm -rf dist && rm -f tsconfig.build.tsbuildinfo",
     "test": "mocha --config .mocharc.js",
-    "fix": "pnpm lint:fix && pnpm format:fix && pnpm test && pnpm typecheck"
+    "fix": "pnpm lint:fix && pnpm format:fix && pnpm test && pnpm typecheck",
+    "build": "tsc -p ./tsconfig.prod.json --outDir ./dist"
   },
   "devDependencies": {
     "@types/mocha": "^9.1.1",

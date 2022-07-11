@@ -11,5 +11,6 @@
     "composite": true,
     "incremental": true
   },
-  "files": [],
+  "include": ["src/**/*.ts"],
+  "exclude": ["**/node_modules"]
 }

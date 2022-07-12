@@ -16,11 +16,11 @@ async function main(): Promise<void> {
   const directoryPath = join(process.env['GITHUB_WORKSPACE'] || process.cwd(), _directory)
 
   if (context.eventName === 'pull_request') {
-    await artifactClient.uploadDirectory('deploy-branch-action', directoryPath)
-    const pageUrl = artifactClient.getPageUrl('deploy-branch-action')
+    await artifactClient.uploadDirectory('D1', directoryPath)
+    const pageUrl = artifactClient.getPageUrl('D1')
 
     await createCommentOrUpdate({
-      message: `Branch deployed at ${pageUrl}`,
+      message: `[Branch deployment ready](${pageUrl})`,
       uniqueAppId: 'superactions/deploy-branch-action',
       githubToken: token,
     })

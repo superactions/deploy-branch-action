@@ -21,11 +21,12 @@ async function main(): Promise<void> {
   }
 
   if (context.eventName === 'pull_request') {
+    // short names because of our subdomain limitation
     await artifactClient.uploadDirectory('d1', directoryPath)
     const pageUrl = artifactClient.getPageUrl('d1')
 
     await createCommentOrUpdate({
-      message: `[Branch deployment ready](${pageUrl})`,
+      message: `[🚀 Branch deployment](${pageUrl})`,
       uniqueAppId: 'superactions/deploy-branch-action',
       githubToken: token,
     })

@@ -2,6 +2,7 @@ import * as core from '@actions/core'
 import * as github from '@actions/github'
 import * as artifact from '@superactions/artifact'
 import { createCommentOrUpdate } from '@superactions/comment'
+import { existsSync } from 'fs'
 import { join } from 'path'
 
 const context = github.context
@@ -14,6 +15,10 @@ const artifactClient = artifact.create({ ghToken: token })
 async function main(): Promise<void> {
   const _directory = core.getInput('directory')
   const directoryPath = join(process.env['GITHUB_WORKSPACE'] || process.cwd(), _directory)
+
+  if (!existsSync(directoryPath)) {
+    throw new Error(`Directory ${directoryPath} doesn't exist!`)
+  }
 
   if (context.eventName === 'pull_request') {
     await artifactClient.uploadDirectory('D1', directoryPath)

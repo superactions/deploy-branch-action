@@ -1,0 +1,11 @@
+name: 'Deploy Branch'
+description: 'Deploy webpack and post URL back on PR'
+author: 'SuperActions'
+inputs:
+  token:
+    default: ${{ github.token }}
+  directory:
+    required: true
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

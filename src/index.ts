@@ -21,8 +21,8 @@ async function main(): Promise<void> {
   }
 
   if (context.eventName === 'pull_request') {
-    await artifactClient.uploadDirectory('D1', directoryPath)
-    const pageUrl = artifactClient.getPageUrl('D1')
+    await artifactClient.uploadDirectory('d1', directoryPath)
+    const pageUrl = artifactClient.getPageUrl('d1')
 
     await createCommentOrUpdate({
       message: `[Branch deployment ready](${pageUrl})`,

@@ -7016,9 +7016,9 @@ var require_github = __commonJS({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.3/node_modules/@superactions/artifact/dist/github/extractCommitContext.js
+// node_modules/.pnpm/@superactions+artifact@0.1.4/node_modules/@superactions/artifact/dist/github/extractCommitContext.js
 var require_extractCommitContext = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.3/node_modules/@superactions/artifact/dist/github/extractCommitContext.js"(exports) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.4/node_modules/@superactions/artifact/dist/github/extractCommitContext.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.extractCommitContext = void 0;
@@ -11059,17 +11059,14 @@ var init_url_join = __esm({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.3/node_modules/@superactions/artifact/dist/networking/ArtifactApi.js
+// node_modules/.pnpm/@superactions+artifact@0.1.4/node_modules/@superactions/artifact/dist/networking/ArtifactApi.js
 var require_ArtifactApi = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.3/node_modules/@superactions/artifact/dist/networking/ArtifactApi.js"(exports) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.4/node_modules/@superactions/artifact/dist/networking/ArtifactApi.js"(exports) {
     "use strict";
-    var __importDefault = exports && exports.__importDefault || function(mod) {
-      return mod && mod.__esModule ? mod : { "default": mod };
-    };
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ArtifactApi = void 0;
     var esm_min_js_1 = (init_esm_min(), __toCommonJS(esm_min_exports));
-    var url_join_1 = __importDefault((init_url_join(), __toCommonJS(url_join_exports)));
+    var url_join_1 = (init_url_join(), __toCommonJS(url_join_exports));
     var ArtifactApi = class {
       constructor(httpClient, apiRoot, artifactProxyRoot, authToken, repoFullName) {
         this.httpClient = httpClient;
@@ -12802,16 +12799,13 @@ var init_src = __esm({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.3/node_modules/@superactions/artifact/dist/networking/HttpClient.js
+// node_modules/.pnpm/@superactions+artifact@0.1.4/node_modules/@superactions/artifact/dist/networking/HttpClient.js
 var require_HttpClient = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.3/node_modules/@superactions/artifact/dist/networking/HttpClient.js"(exports) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.4/node_modules/@superactions/artifact/dist/networking/HttpClient.js"(exports) {
     "use strict";
-    var __importDefault = exports && exports.__importDefault || function(mod) {
-      return mod && mod.__esModule ? mod : { "default": mod };
-    };
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.HttpClient = void 0;
-    var node_fetch_1 = __importDefault((init_src(), __toCommonJS(src_exports)));
+    var node_fetch_1 = (init_src(), __toCommonJS(src_exports));
     var HttpClient = class {
       async post(url, body, authToken) {
         const response = await (0, node_fetch_1.default)(url, {
@@ -23684,20 +23678,17 @@ var require_mime_types = __commonJS({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.3/node_modules/@superactions/artifact/dist/ArtifactClient.js
+// node_modules/.pnpm/@superactions+artifact@0.1.4/node_modules/@superactions/artifact/dist/ArtifactClient.js
 var require_ArtifactClient = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.3/node_modules/@superactions/artifact/dist/ArtifactClient.js"(exports) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.4/node_modules/@superactions/artifact/dist/ArtifactClient.js"(exports) {
     "use strict";
-    var __importDefault = exports && exports.__importDefault || function(mod) {
-      return mod && mod.__esModule ? mod : { "default": mod };
-    };
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ArtifactClient = void 0;
     var fs_1 = require("fs");
     var stream_1 = require("stream");
     var util_1 = require("util");
     var streamPipeline = (0, util_1.promisify)(stream_1.pipeline);
-    var glob_1 = __importDefault(require_glob());
+    var glob = require_glob();
     var mime_types_1 = require_mime_types();
     var path_1 = require("path");
     var ArtifactClient = class {
@@ -23707,11 +23698,11 @@ var require_ArtifactClient = __commonJS({
       async uploadFile(key, filePath) {
         const { size } = (0, fs_1.statSync)(filePath);
         const fileStream = (0, fs_1.createReadStream)(filePath);
-        const contentType = (0, mime_types_1.lookup)(filePath);
+        const contentType = (0, mime_types_1.lookup)(filePath) || "text/plain";
         return await this.artifactsApi.uploadArtifact(fileStream, size, key, contentType);
       }
       async uploadDirectory(key, directoryPath) {
-        const allFiles = glob_1.default.sync(`${directoryPath}/**/*`, {
+        const allFiles = glob.sync(`${directoryPath}/**/*`, {
           absolute: true,
           follow: false,
           nodir: true
@@ -23754,9 +23745,9 @@ var require_ArtifactClient = __commonJS({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.3/node_modules/@superactions/artifact/dist/PrArtifactClient.js
+// node_modules/.pnpm/@superactions+artifact@0.1.4/node_modules/@superactions/artifact/dist/PrArtifactClient.js
 var require_PrArtifactClient = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.3/node_modules/@superactions/artifact/dist/PrArtifactClient.js"(exports) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.4/node_modules/@superactions/artifact/dist/PrArtifactClient.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.PrArtifactClient = void 0;
@@ -23802,45 +23793,13 @@ var require_PrArtifactClient = __commonJS({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.3/node_modules/@superactions/artifact/dist/index.js
+// node_modules/.pnpm/@superactions+artifact@0.1.4/node_modules/@superactions/artifact/dist/index.js
 var require_dist = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.3/node_modules/@superactions/artifact/dist/index.js"(exports) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.4/node_modules/@superactions/artifact/dist/index.js"(exports) {
     "use strict";
-    var __createBinding = exports && exports.__createBinding || (Object.create ? function(o, m2, k, k2) {
-      if (k2 === void 0)
-        k2 = k;
-      var desc = Object.getOwnPropertyDescriptor(m2, k);
-      if (!desc || ("get" in desc ? !m2.__esModule : desc.writable || desc.configurable)) {
-        desc = { enumerable: true, get: function() {
-          return m2[k];
-        } };
-      }
-      Object.defineProperty(o, k2, desc);
-    } : function(o, m2, k, k2) {
-      if (k2 === void 0)
-        k2 = k;
-      o[k2] = m2[k];
-    });
-    var __setModuleDefault = exports && exports.__setModuleDefault || (Object.create ? function(o, v) {
-      Object.defineProperty(o, "default", { enumerable: true, value: v });
-    } : function(o, v) {
-      o["default"] = v;
-    });
-    var __importStar = exports && exports.__importStar || function(mod) {
-      if (mod && mod.__esModule)
-        return mod;
-      var result = {};
-      if (mod != null) {
-        for (var k in mod)
-          if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
-            __createBinding(result, mod, k);
-      }
-      __setModuleDefault(result, mod);
-      return result;
-    };
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.create = void 0;
-    var github2 = __importStar(require_github());
+    var github2 = require_github();
     var extractCommitContext_1 = require_extractCommitContext();
     var ArtifactApi_1 = require_ArtifactApi();
     var HttpClient_1 = require_HttpClient();

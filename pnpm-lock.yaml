@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@actions/core': ^1.9.0
   '@actions/github': ^5.0.3
-  '@superactions/artifact': ^0.1.4
+  '@superactions/artifact': ^0.1.5
   '@superactions/comment': ^0.1.1
   '@types/mocha': ^9.1.1
   '@types/node': ^17.0.35
@@ -26,7 +26,7 @@ specifiers:
 dependencies:
   '@actions/core': 1.9.0
   '@actions/github': 5.0.3
-  '@superactions/artifact': 0.1.4
+  '@superactions/artifact': 0.1.5
   '@superactions/comment': 0.1.1
 
 devDependencies:
@@ -268,13 +268,15 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /@superactions/artifact/0.1.4:
-    resolution: {integrity: sha512-KJ19o4A+jCXty/hKLe3xJ5aPedgioXaXJf/xCsIhz37sZRfQFxY0tJQgD4jKmNiIGuDYOe07CAzrtxv+Vt8TGQ==}
+  /@superactions/artifact/0.1.5:
+    resolution: {integrity: sha512-U68d1H81D4E7IkFEwP2mN5i+xJ6HV50Rd8JMe3Rwolbm8S4TptCj4rs+qk4g/bcXjVYiUQ6fB/5ldnP68RAy5g==}
     dependencies:
       '@actions/github': 5.0.3
+      '@types/bluebird': 3.5.36
       '@types/form-data': 2.5.0
       '@types/glob': 7.2.0
       '@types/mime-types': 2.1.1
+      bluebird: 3.7.2
       form-data: 4.0.0
       formdata-polyfill: 4.0.10
       glob: 8.0.3
@@ -307,6 +309,10 @@ packages:
     dependencies:
       '@babel/types': 7.18.2
     dev: true
+
+  /@types/bluebird/3.5.36:
+    resolution: {integrity: sha512-HBNx4lhkxN7bx6P0++W8E289foSu8kO8GCk2unhuVggO+cE7rh9DhZUyPhUxNRG9m+5B5BTKxZQ5ZP92x/mx9Q==}
+    dev: false
 
   /@types/cacheable-request/6.0.2:
     resolution: {integrity: sha512-B3xVo+dlKM6nnKTcmm5ZtY/OL8bOAOd2Olee9M1zft65ox50OzjEHW91sDiU9j6cvW8Ejg1/Qkf4xd2kugApUA==}
@@ -701,6 +707,10 @@ packages:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
     dev: true
+
+  /bluebird/3.7.2:
+    resolution: {integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==}
+    dev: false
 
   /brace-expansion/1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}

@@ -7016,9 +7016,9 @@ var require_github = __commonJS({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.6/node_modules/@superactions/artifact/dist/github/extractCommitContext.js
+// node_modules/.pnpm/@superactions+artifact@0.1.7/node_modules/@superactions/artifact/dist/github/extractCommitContext.js
 var require_extractCommitContext = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.6/node_modules/@superactions/artifact/dist/github/extractCommitContext.js"(exports2) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.7/node_modules/@superactions/artifact/dist/github/extractCommitContext.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.extractCommitContext = void 0;
@@ -11059,9 +11059,9 @@ var init_url_join = __esm({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.6/node_modules/@superactions/artifact/dist/networking/ArtifactApi.js
+// node_modules/.pnpm/@superactions+artifact@0.1.7/node_modules/@superactions/artifact/dist/networking/ArtifactApi.js
 var require_ArtifactApi = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.6/node_modules/@superactions/artifact/dist/networking/ArtifactApi.js"(exports2) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.7/node_modules/@superactions/artifact/dist/networking/ArtifactApi.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.ArtifactApi = void 0;
@@ -12802,9 +12802,9 @@ var init_src = __esm({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.6/node_modules/@superactions/artifact/dist/networking/HttpClient.js
+// node_modules/.pnpm/@superactions+artifact@0.1.7/node_modules/@superactions/artifact/dist/networking/HttpClient.js
 var require_HttpClient = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.6/node_modules/@superactions/artifact/dist/networking/HttpClient.js"(exports2) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.7/node_modules/@superactions/artifact/dist/networking/HttpClient.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.HttpClient = void 0;
@@ -28743,9 +28743,9 @@ var require_mime_types = __commonJS({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.6/node_modules/@superactions/artifact/dist/ArtifactClient.js
+// node_modules/.pnpm/@superactions+artifact@0.1.7/node_modules/@superactions/artifact/dist/ArtifactClient.js
 var require_ArtifactClient = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.6/node_modules/@superactions/artifact/dist/ArtifactClient.js"(exports2) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.7/node_modules/@superactions/artifact/dist/ArtifactClient.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.ArtifactClient = void 0;
@@ -28757,7 +28757,7 @@ var require_ArtifactClient = __commonJS({
     var glob = require_glob();
     var mime_types_1 = require_mime_types();
     var path_1 = require("path");
-    var MAX_CONNECTIONS = 30;
+    var MAX_CONNECTIONS = 15;
     var ArtifactClient = class {
       constructor(artifactsApi) {
         this.artifactsApi = artifactsApi;
@@ -28812,9 +28812,9 @@ var require_ArtifactClient = __commonJS({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.6/node_modules/@superactions/artifact/dist/PrArtifactClient.js
+// node_modules/.pnpm/@superactions+artifact@0.1.7/node_modules/@superactions/artifact/dist/PrArtifactClient.js
 var require_PrArtifactClient = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.6/node_modules/@superactions/artifact/dist/PrArtifactClient.js"(exports2) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.7/node_modules/@superactions/artifact/dist/PrArtifactClient.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.PrArtifactClient = void 0;
@@ -28860,9 +28860,9 @@ var require_PrArtifactClient = __commonJS({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.6/node_modules/@superactions/artifact/dist/index.js
+// node_modules/.pnpm/@superactions+artifact@0.1.7/node_modules/@superactions/artifact/dist/index.js
 var require_dist = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.6/node_modules/@superactions/artifact/dist/index.js"(exports2) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.7/node_modules/@superactions/artifact/dist/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.create = void 0;

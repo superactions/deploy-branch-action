@@ -7016,9 +7016,9 @@ var require_github = __commonJS({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.8/node_modules/@superactions/artifact/dist/github/extractCommitContext.js
+// node_modules/.pnpm/@superactions+artifact@0.1.9/node_modules/@superactions/artifact/dist/github/extractCommitContext.js
 var require_extractCommitContext = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.8/node_modules/@superactions/artifact/dist/github/extractCommitContext.js"(exports2) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.9/node_modules/@superactions/artifact/dist/github/extractCommitContext.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.extractCommitContext = void 0;
@@ -11059,9 +11059,9 @@ var init_url_join = __esm({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.8/node_modules/@superactions/artifact/dist/networking/ArtifactApi.js
+// node_modules/.pnpm/@superactions+artifact@0.1.9/node_modules/@superactions/artifact/dist/networking/ArtifactApi.js
 var require_ArtifactApi = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.8/node_modules/@superactions/artifact/dist/networking/ArtifactApi.js"(exports2) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.9/node_modules/@superactions/artifact/dist/networking/ArtifactApi.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.ArtifactApi = void 0;
@@ -11076,17 +11076,20 @@ var require_ArtifactApi = __commonJS({
         this.repoFullName = repoFullName;
       }
       async uploadArtifact(file, size, key, contentType) {
-        const form = new esm_min_js_1.FormData();
-        form.append("file", {
-          [Symbol.toStringTag]: "File",
-          size,
-          name: "foo.txt",
-          stream() {
-            return file;
-          },
-          type: contentType
-        });
-        await this.httpClient.post((0, url_join_1.default)(this.apiRoot, "artifact/file/", escapeSpecialCharsFromPath(key)), form, this.authToken);
+        function makeBody() {
+          const form = new esm_min_js_1.FormData();
+          form.append("file", {
+            [Symbol.toStringTag]: "File",
+            size,
+            name: "foo.txt",
+            stream() {
+              return file();
+            },
+            type: contentType
+          });
+          return form;
+        }
+        await this.httpClient.post((0, url_join_1.default)(this.apiRoot, "artifact/file/", escapeSpecialCharsFromPath(key)), makeBody, this.authToken);
       }
       async downloadArtifact(name) {
         return await this.httpClient.stream(this.getArtifactUrl(name));
@@ -17864,26 +17867,30 @@ var init_src = __esm({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.8/node_modules/@superactions/artifact/dist/networking/HttpClient.js
+// node_modules/.pnpm/@superactions+artifact@0.1.9/node_modules/@superactions/artifact/dist/networking/HttpClient.js
 var require_HttpClient = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.8/node_modules/@superactions/artifact/dist/networking/HttpClient.js"(exports2) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.9/node_modules/@superactions/artifact/dist/networking/HttpClient.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.HttpClient = void 0;
+    var core2 = require_core();
     var bluebird_1 = require_bluebird();
     var node_fetch_1 = (init_src(), __toCommonJS(src_exports));
     var HttpClient = class {
-      async post(url, body, authToken) {
+      async post(url, bodyFn, authToken) {
         return await retry(async () => {
+          core2.debug(`Calling: ${url}`);
           const response = await (0, node_fetch_1.default)(url, {
             method: "POST",
-            body,
+            body: bodyFn(),
             headers: {
               authorization: authToken
             }
           });
           await handleFailures(response);
-          return await response.json();
+          const responseJson = await response.json();
+          core2.debug(`Successfully called ${url}`);
+          return responseJson;
         });
       }
       async stream(url) {
@@ -17910,8 +17917,12 @@ var require_HttpClient = __commonJS({
         try {
           return await asyncFn();
         } catch (e2) {
+          core2.warning(`Failed with ${e2.message}`);
           lastError = e2;
-          await (0, bluebird_1.delay)(retryDelay);
+          const randomizeDelay = Math.random() * retryDelay + 0.5 * retryDelay;
+          const backOffDelay = randomizeDelay * (retryNo - remainingRetries);
+          core2.warning(`Retry in ${backOffDelay}!`);
+          await (0, bluebird_1.delay)(backOffDelay);
         }
       }
       throw lastError;
@@ -28761,9 +28772,9 @@ var require_mime_types = __commonJS({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.8/node_modules/@superactions/artifact/dist/ArtifactClient.js
+// node_modules/.pnpm/@superactions+artifact@0.1.9/node_modules/@superactions/artifact/dist/ArtifactClient.js
 var require_ArtifactClient = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.8/node_modules/@superactions/artifact/dist/ArtifactClient.js"(exports2) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.9/node_modules/@superactions/artifact/dist/ArtifactClient.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.ArtifactClient = void 0;
@@ -28775,16 +28786,16 @@ var require_ArtifactClient = __commonJS({
     var glob = require_glob();
     var mime_types_1 = require_mime_types();
     var path_1 = require("path");
-    var MAX_CONNECTIONS = 30;
+    var MAX_CONNECTIONS = 20;
     var ArtifactClient = class {
       constructor(artifactsApi) {
         this.artifactsApi = artifactsApi;
       }
       async uploadFile(key, filePath) {
         const { size } = (0, fs_1.statSync)(filePath);
-        const fileStream = (0, fs_1.createReadStream)(filePath);
+        const makeFileStream = () => (0, fs_1.createReadStream)(filePath);
         const contentType = (0, mime_types_1.lookup)(filePath) || "text/plain";
-        return await this.artifactsApi.uploadArtifact(fileStream, size, key, contentType);
+        return await this.artifactsApi.uploadArtifact(makeFileStream, size, key, contentType);
       }
       async uploadDirectory(key, directoryPath) {
         const allFiles = glob.sync(`${directoryPath}/**/*`, {
@@ -28830,9 +28841,9 @@ var require_ArtifactClient = __commonJS({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.8/node_modules/@superactions/artifact/dist/PrArtifactClient.js
+// node_modules/.pnpm/@superactions+artifact@0.1.9/node_modules/@superactions/artifact/dist/PrArtifactClient.js
 var require_PrArtifactClient = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.8/node_modules/@superactions/artifact/dist/PrArtifactClient.js"(exports2) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.9/node_modules/@superactions/artifact/dist/PrArtifactClient.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.PrArtifactClient = void 0;
@@ -28878,9 +28889,9 @@ var require_PrArtifactClient = __commonJS({
   }
 });
 
-// node_modules/.pnpm/@superactions+artifact@0.1.8/node_modules/@superactions/artifact/dist/index.js
+// node_modules/.pnpm/@superactions+artifact@0.1.9/node_modules/@superactions/artifact/dist/index.js
 var require_dist = __commonJS({
-  "node_modules/.pnpm/@superactions+artifact@0.1.8/node_modules/@superactions/artifact/dist/index.js"(exports2) {
+  "node_modules/.pnpm/@superactions+artifact@0.1.9/node_modules/@superactions/artifact/dist/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.create = void 0;
